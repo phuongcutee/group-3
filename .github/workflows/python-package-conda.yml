@@ -38,46 +38,32 @@ jobs:
         conda install pytest
         pytest
 
-    - name: Random Job
+    - name: Random Job 1
+      if: matrix.random-id == 1
       run: |
-        # Thực hiện công việc ngẫu nhiên dựa trên giá trị random-id
-        case ${{ matrix.random-id }} in
-          1)
-            echo "Running Random Job 1"
-            # Thêm lệnh thực hiện công việc của bạn ở đây
-            ;;
-          2)
-            echo "Running Random Job 2"
-            # Thêm lệnh thực hiện công việc của bạn ở đây
-            ;;
-          3)
-            echo "Running Random Job 3"
-            # Thêm lệnh thực hiện công việc của bạn ở đây
-            ;;
-          4)
-            echo "Running Random Job 4"
-            # Thêm lệnh thực hiện công việc của bạn ở đây
-            ;;
-          5)
-            echo "Running Random Job 5"
-            # Thêm lệnh thực hiện công việc của bạn ở đây
-            ;;
-        esac
-
-  additional-job-1:
-    needs: build-linux
-    runs-on: ubuntu-latest
-    steps:
-    - name: Additional Job 1
-      run: |
-        echo "Running Additional Job 1"
+        echo "Running Random Job 1"
         # Thêm lệnh thực hiện công việc của bạn ở đây
 
-  additional-job-2:
-    needs: build-linux
-    runs-on: ubuntu-latest
-    steps:
-    - name: Additional Job 2
+    - name: Random Job 2
+      if: matrix.random-id == 2
       run: |
-        echo "Running Additional Job 2"
+        echo "Running Random Job 2"
+        # Thêm lệnh thực hiện công việc của bạn ở đây
+
+    - name: Random Job 3
+      if: matrix.random-id == 3
+      run: |
+        echo "Running Random Job 3"
+        # Thêm lệnh thực hiện công việc của bạn ở đây
+
+    - name: Random Job 4
+      if: matrix.random-id == 4
+      run: |
+        echo "Running Random Job 4"
+        # Thêm lệnh thực hiện công việc của bạn ở đây
+
+    - name: Random Job 5
+      if: matrix.random-id == 5
+      run: |
+        echo "Running Random Job 5"
         # Thêm lệnh thực hiện công việc của bạn ở đây
