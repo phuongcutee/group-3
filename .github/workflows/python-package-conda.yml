@@ -1,0 +1,83 @@
+name: Python Package using Conda
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        random-id: [1, 2, 3, 4, 5]  # Thêm các giá trị ngẫu nhiên cho công việc
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+
+    - name: Add conda to system path
+      run: echo $CONDA/bin >> $GITHUB_PATH
+
+    - name: Install dependencies
+      run: conda env update --file environment.yml --name base
+
+    - name: Lint with flake8
+      run: |
+        conda install flake8
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Test with pytest
+      run: |
+        conda install pytest
+        pytest
+
+    - name: Random Job
+      run: |
+        # Thực hiện công việc ngẫu nhiên dựa trên giá trị random-id
+        case ${{ matrix.random-id }} in
+          1)
+            echo "Running Random Job 1"
+            # Thêm lệnh thực hiện công việc của bạn ở đây
+            ;;
+          2)
+            echo "Running Random Job 2"
+            # Thêm lệnh thực hiện công việc của bạn ở đây
+            ;;
+          3)
+            echo "Running Random Job 3"
+            # Thêm lệnh thực hiện công việc của bạn ở đây
+            ;;
+          4)
+            echo "Running Random Job 4"
+            # Thêm lệnh thực hiện công việc của bạn ở đây
+            ;;
+          5)
+            echo "Running Random Job 5"
+            # Thêm lệnh thực hiện công việc của bạn ở đây
+            ;;
+        esac
+
+  additional-job-1:
+    needs: build-linux
+    runs-on: ubuntu-latest
+    steps:
+    - name: Additional Job 1
+      run: |
+        echo "Running Additional Job 1"
+        # Thêm lệnh thực hiện công việc của bạn ở đây
+
+  additional-job-2:
+    needs: build-linux
+    runs-on: ubuntu-latest
+    steps:
+    - name: Additional Job 2
+      run: |
+        echo "Running Additional Job 2"
+        # Thêm lệnh thực hiện công việc của bạn ở đây
